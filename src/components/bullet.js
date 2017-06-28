@@ -82,9 +82,9 @@ AFRAME.registerComponent('bullet', {
   },
 
   tick: (function () {
-    var position = new THREE.Vector3();
-    var direction = new THREE.Vector3();
     return function tick (time, delta) {
+      var position = new THREE.Vector3();
+      var direction = new THREE.Vector3();
 
       if (!this.initTime) {this.initTime = time;}
 
