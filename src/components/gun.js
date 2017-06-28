@@ -7,7 +7,7 @@ var WEAPONS = require('./weapon');
 AFRAME.registerComponent('shoot', {
   schema: {
     direction: {type: 'vec3', default: {x: 0, y: -2, z: -1}},  // Event to fire bullet.
-    on: {default: 'triggerdown'},  // Event to fire bullet.
+    on: {default: 'trackpaddown'},  // Event to fire bullet.
     spaceKeyEnabled: {default: false},  // Keyboard support.
     weapon: {default: 'default'}  // Weapon definition.
   },
@@ -31,12 +31,12 @@ AFRAME.registerComponent('shoot', {
       });
     }
 
-    if (AFRAME.utils.device.isMobile())
-    {
-      window.addEventListener('click', function (evt) {
-        self.shoot();
-      });
-    }
+    // if (AFRAME.utils.device.isMobile())
+    // {
+    //   window.addEventListener('click', function (evt) {
+    //     self.shoot();
+    //   });
+    // }
   },
 
   update: function (oldData) {
@@ -67,6 +67,7 @@ AFRAME.registerComponent('shoot', {
       ABLAST.currentScore.shoots++;
 
       // Get firing entity's transformations.
+      el.object3D.updateMatrixWorld();
       matrixWorld = el.object3D.matrixWorld;
       position.setFromMatrixPosition(matrixWorld);
       matrixWorld.decompose(translation, quaternion, scale);
